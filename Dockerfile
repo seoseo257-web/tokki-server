@@ -6,8 +6,8 @@ WORKDIR /app
 
 # 의존성 먼저(레이어 캐시 활용). 함께 배포되는 lock 그대로 설치(npm ci) — 재배포마다 같은 판이 돌게 한다.
 # tsx·typescript 는 devDependencies 지만 런타임(tsx 직접 실행)에 필요하므로 --omit=dev 를 붙이면 안 된다.
-COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+COPY package.json ./
+RUN npm install --no-audit --no-fund
 
 # 서버 소스 복사(.dockerignore 가 node_modules·data 제외).
 COPY . .
